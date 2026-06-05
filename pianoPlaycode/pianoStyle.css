@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: pink;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 30px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s;
+  width: 220px; /* Set a fixed width */
+  text-align: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.grandpiano {
+  position: absolute;
+  left: 1100px;
+  top: 10px;
+}
+
+.notes {
+  position: absolute;
+  left: 60px;
+  top: 300px;
+  rotate: -10deg;
+}
