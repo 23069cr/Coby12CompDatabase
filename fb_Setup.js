@@ -1,3 +1,5 @@
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCtuw4Mq8x_rZoVNdub2uOe3nmEU2kuHTM",
   authDomain: "gamescores-d64fc.firebaseapp.com",
@@ -8,3 +10,6 @@ const firebaseConfig = {
   appId: "1:428921323223:web:8b3ce44d84e89db8a17a92",
   measurementId: "G-EC3LKSX1J0"
 };
+
+// Set up the connection to your Firebase Realtime Database
+firebase.initializeApp(firebaseConfig);
