@@ -47,10 +47,12 @@ function fb_handleLogin(_user) {
 //makes a log in with google account pop up//
 function fb_popupLogin() {
   var provider = new firebase.auth.GoogleAuthProvider();
-  
+
   firebase.auth().signInWithPopup(provider).then((result) => {
     GLOBAL_user = result.user; // Save the user details object to a global variable
     console.log("User has logged in")
+    const OUTPUT = document.getElementById("JavaScriptOutput");
+    OUTPUT.innerHTML = "<h2>Added by JavaScript</h2>";
   });
 }
 
@@ -59,8 +61,6 @@ function fb_logout() {
   firebase.auth().signOut();
   console.log("logged out (hopefully)")
 }
-
-
 
 
 highscoreTable = {

@@ -20,7 +20,6 @@
   <!-- firebase end ******************************************-->
   <script src="fb_Setup.js"></script>
   <script src="fb_io.js"></script>
-  <script>HTML_OUTPUT.innerHTML = '<img id="mainPhoto" src="' + GLOBAL_User.photoURL + '" alt="Gallery View"></img>'</script>
 </head>
 
 <!--***************************************************
@@ -28,13 +27,17 @@
 ****************************************************-->
 
 <body>
+  <div id="JavaScriptOutput">
+    <p>This will be replaced</p>
+  </div>
+  
   <div class="container">
     <div class="column">
       <button onclick="fb_login()">Login</button>
       <button onclick="fb_logout()">Logout</button>
       <button onclick="location.href='GeoDash.html'">GeoDash<button>
-      <button onclick="location.href='sandboxPianoGame.html'">Piano Play<button>
-       <button onclick="helloWorld()">Hello world</button>
+          <button onclick="location.href='sandboxPianoGame.html'">Piano Play<button>
+              <button onclick="helloWorld()">Hello world</button>
     </div>
   </div>
 </body>
