@@ -12,13 +12,8 @@ function DO_THIS(snapshot) {
 }
 
 
-let user = prompt("What is your name?");
-console.log("user: " + user);
-let score = 0;
-console.log("score: " + score);
-firebase.database().ref('/game1/users/' + user).set(
-  score
-);
+
+
 
 
 
@@ -35,11 +30,17 @@ function fb_login() {
 //this is the callback function for the listener//
 function fb_handleLogin(_user) {
   if (_user) {
-    console.log("User is logged in")
+    let user = prompt("What is your name?");
+    console.log("Logged in user:", user, user.email);
+    firebase.database().ref('/game1/users/' + user)
     GLOBAL_user = _user; //Save the user details object to a global variable
+    const OUTPUT = document.getElementById("JavaScriptOutput");
+    OUTPUT.innerHTML = "<h2>Added by JavaScript</h2><button onclick=\"location.href='sandboxPianoGame.html'\">Piano Play<button><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
   } else {
     console.log("User is NOT logged in - Starting the popup process")
     fb_popupLogin();
+    const OUTPUT = document.getElementById("JavaScriptOutput");
+    OUTPUT.innerHTML = "<h2>Login to continue</h2>";
   }
 }
 
@@ -51,8 +52,6 @@ function fb_popupLogin() {
   firebase.auth().signInWithPopup(provider).then((result) => {
     GLOBAL_user = result.user; // Save the user details object to a global variable
     console.log("User has logged in")
-    const OUTPUT = document.getElementById("JavaScriptOutput");
-    OUTPUT.innerHTML = "<h2>Added by JavaScript</h2>";
   });
 }
 
