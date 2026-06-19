@@ -13,3 +13,4 @@ const firebaseConfig = {
 
 // Set up the connection to your Firebase Realtime Database
 firebase.initializeApp(firebaseConfig);
+

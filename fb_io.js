@@ -18,13 +18,35 @@ function DO_THIS(snapshot) {
 
 
 
-
+var signInWithPopup;
 var GLOBAL_user;
 var authenticationListener;
 //this is a listener that runs once//
-function fb_login() {
+async function fb_login() {
   authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user; // Contains the Google login info
+    //user information
+    const userData = {
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+      createdAt: new Date().toISOString()
+    };
+    await setDoc(doc(db, "users", user.uid), userData, { merge: true });
+    document.getElementById("loginBtn").addEventListener("click", fb_login);
+    console.log("Google login data successfully saved to Firebase Database!");
+
+  } catch (error) {
+    console.error("Error during authentication or database transfer:", error.message);
+  }
 }
+
+
+
+
 
 
 //this is the callback function for the listener//
@@ -35,7 +57,7 @@ function fb_handleLogin(_user) {
     firebase.database().ref('/game1/users/' + user)
     GLOBAL_user = _user; //Save the user details object to a global variable
     const OUTPUT = document.getElementById("JavaScriptOutput");
-    OUTPUT.innerHTML = "<h2>Added by JavaScript</h2><button onclick=\"location.href='sandboxPianoGame.html'\">Piano Play<button><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
+    OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='sandboxPianoGame.html'\">Piano Play<button><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
   } else {
     console.log("User is NOT logged in - Starting the popup process")
     fb_popupLogin();
@@ -60,6 +82,7 @@ function fb_logout() {
   firebase.auth().signOut();
   console.log("logged out (hopefully)")
 }
+
 
 
 highscoreTable = {
