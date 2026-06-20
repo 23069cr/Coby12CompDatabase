@@ -18,31 +18,57 @@ function DO_THIS(snapshot) {
 
 
 
-var signInWithPopup;
-var GLOBAL_user;
-var authenticationListener;
-//this is a listener that runs once//
+import { signInWithPopup } from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+
+let signInWithPopupResult;
+let GLOBAL_user;
+
 async function fb_login() {
-  authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
   try {
+    // Google/Facebook login popup
     const result = await signInWithPopup(auth, provider);
-    const user = result.user; // Contains the Google login info
-    //user information
+
+    const user = result.user;
+
+    if (!user) {
+      console.error("No user returned from authentication.");
+      return;
+    }
+
+    // Save user globally if needed
+    GLOBAL_user = user;
+
     const userData = {
       uid: user.uid,
-      name: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL,
-      createdAt: new Date().toISOString()
+      email: user.email || "",
+      name: user.displayName || "",
+      photoURL: user.photoURL || "",
+      createdAt: serverTimestamp(),
     };
-    await setDoc(doc(db, "users", user.uid), userData, { merge: true });
-    document.getElementById("loginBtn").addEventListener("click", fb_login);
-    console.log("Google login data successfully saved to Firebase Database!");
+
+    // Save to Firestore
+    await setDoc(
+      doc(db, "users", user.uid),
+      userData,
+      { merge: true }
+    );
+
+    console.log("User data saved successfully!");
+    console.log(userData);
 
   } catch (error) {
-    console.error("Error during authentication or database transfer:", error.message);
+    console.error(
+      "Error during authentication or database write:",
+      error
+    );
   }
 }
+
+document
+  .getElementById("loginBtn")
+  .addEventListener("click", fb_login);
+
 
 
 
