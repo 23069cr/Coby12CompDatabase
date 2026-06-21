@@ -17,58 +17,12 @@ function DO_THIS(snapshot) {
 
 
 
-
-import { signInWithPopup } from "firebase/auth";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-
-let signInWithPopupResult;
-let GLOBAL_user;
-
-async function fb_login() {
-  try {
-    // Google/Facebook login popup
-    const result = await signInWithPopup(auth, provider);
-
-    const user = result.user;
-
-    if (!user) {
-      console.error("No user returned from authentication.");
-      return;
-    }
-
-    // Save user globally if needed
-    GLOBAL_user = user;
-
-    const userData = {
-      uid: user.uid,
-      email: user.email || "",
-      name: user.displayName || "",
-      photoURL: user.photoURL || "",
-      createdAt: serverTimestamp(),
-    };
-
-    // Save to Firestore
-    await setDoc(
-      doc(db, "users", user.uid),
-      userData,
-      { merge: true }
-    );
-
-    console.log("User data saved successfully!");
-    console.log(userData);
-
-  } catch (error) {
-    console.error(
-      "Error during authentication or database write:",
-      error
-    );
-  }
+var GLOBAL_user;
+var authenticationListener;
+//this is a listener that runs once//
+function fb_login() {
+  authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
 }
-
-document
-  .getElementById("loginBtn")
-  .addEventListener("click", fb_login);
-
 
 
 
@@ -76,12 +30,19 @@ document
 
 
 //this is the callback function for the listener//
-function fb_handleLogin(_user) {
+async function fb_handleLogin(_user) {
   if (_user) {
     let user = prompt("What is your name?");
-    console.log("Logged in user:", user, user.email);
+    console.log("Logged in user:", user);
     firebase.database().ref('/game1/users/' + user)
     GLOBAL_user = _user; //Save the user details object to a global variable
+        await firebase.database().ref('PianoPlay/Users/' + GLOBAL_user.uid).update(
+            {
+                name: GLOBAL_user.displayName,
+                email: GLOBAL_user.email,
+                profile: GLOBAL_user.photoURL
+            }
+    );
     const OUTPUT = document.getElementById("JavaScriptOutput");
     OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='sandboxPianoGame.html'\">Piano Play<button><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
   } else {
@@ -112,7 +73,7 @@ function fb_logout() {
 
 
 highscoreTable = {
-  game1: {
+  PianoPlay: {
     users: {
       Josh: 99999,
       Coby: 10000,
@@ -120,7 +81,7 @@ highscoreTable = {
       Lukas: 345,
     }
   },
-  game2: {
+  GeoDash: {
     users: {
       Josh: 13,
       Coby: 14,
