@@ -36,7 +36,7 @@ async function fb_handleLogin(_user) {
     console.log("Logged in user:", user);
     firebase.database().ref('/game1/users/' + user)
     GLOBAL_user = _user; //Save the user details object to a global variable
-        await firebase.database().ref('PianoPlay/Users/' + GLOBAL_user.uid).update(
+        await firebase.database().ref('PianoPlay/users/' + GLOBAL_user.uid).update(
             {
                 name: GLOBAL_user.displayName,
                 email: GLOBAL_user.email,
