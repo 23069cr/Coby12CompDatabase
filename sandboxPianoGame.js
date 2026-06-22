@@ -15,6 +15,9 @@ let A4;
 let Asharp;
 let B4;
 let C5;
+//Grabs data from the local storage//
+GLOBAL_user = JSON.parse(localStorage.getItem("Data"));
+console.log(GLOBAL_user);
 
 var score = 0;
 function preload() {

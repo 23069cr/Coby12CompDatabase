@@ -33,6 +33,10 @@ function fb_login() {
 async function fb_handleLogin(_user) {
   if (_user) {
     let user = prompt("Enter a unique username?");
+  //  let age = prompt("enter your age")
+   // if (age < 16){
+   //   window.close();
+   // }
     console.log("Logged in user:", user);
     firebase.database().ref('/game1/users/' + user)
     GLOBAL_user = _user; //Save the user details object to a global variable
@@ -45,6 +49,7 @@ async function fb_handleLogin(_user) {
         profile: GLOBAL_user.photoURL
       }
     );
+    localStorage.setItem("Data", JSON.stringify(GLOBAL_user));
     const OUTPUT = document.getElementById("JavaScriptOutput");
     OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='sandboxPianoGame.html'\">Piano Play<button><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
   } else {
