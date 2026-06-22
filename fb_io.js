@@ -32,10 +32,11 @@ function fb_login() {
 //this is the callback function for the listener//
 async function fb_handleLogin(_user) {
   if (_user) {
-    let user = prompt("What is your name?");
+    let user = prompt("Enter a unique username?");
     console.log("Logged in user:", user);
     firebase.database().ref('/game1/users/' + user)
     GLOBAL_user = _user; //Save the user details object to a global variable
+    //display user info into the database//
     await firebase.database().ref('PianoPlay/users/' + GLOBAL_user.uid).update(
       {
         username: (user),
