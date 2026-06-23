@@ -46,7 +46,8 @@ async function fb_handleLogin(_user) {
         username: (user),
         name: GLOBAL_user.displayName,
         email: GLOBAL_user.email,
-        profile: GLOBAL_user.photoURL
+        profile: GLOBAL_user.photoURL,
+        age: (age)
       }
     );
     localStorage.setItem("Data", JSON.stringify(GLOBAL_user));
