@@ -33,12 +33,15 @@ function fb_login() {
 async function fb_handleLogin(_user) {
   if (_user) {
     let user = prompt("Enter a unique username?");
-   let age = prompt("enter your age")
-   if (age < 16){
-     window.close();
+    let age = prompt("enter your age")
+    if (age < 16) {
+      window.close();
+    }
+    if (age > 49) {
+      alert("Unc");
     }
     console.log("Logged in user:", user);
-    firebase.database().ref('/game1/users/' + user)
+    var score = 0;
     GLOBAL_user = _user; //Save the user details object to a global variable
     //display user info into the database//
     await firebase.database().ref('PianoPlay/users/' + GLOBAL_user.uid).update(
@@ -47,7 +50,8 @@ async function fb_handleLogin(_user) {
         name: GLOBAL_user.displayName,
         email: GLOBAL_user.email,
         profile: GLOBAL_user.photoURL,
-        age: (age)
+        age: (age),
+        score: (score)
       }
     );
     localStorage.setItem("Data", JSON.stringify(GLOBAL_user));
