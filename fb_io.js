@@ -33,10 +33,10 @@ function fb_login() {
 async function fb_handleLogin(_user) {
   if (_user) {
     let user = prompt("Enter a unique username?");
-  //  let age = prompt("enter your age")
-   // if (age < 16){
-   //   window.close();
-   // }
+   let age = prompt("enter your age")
+   if (age < 16){
+     window.close();
+    }
     console.log("Logged in user:", user);
     firebase.database().ref('/game1/users/' + user)
     GLOBAL_user = _user; //Save the user details object to a global variable
