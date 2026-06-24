@@ -40,7 +40,7 @@ function preload() {
 function setup() {
   console.log("setup: ");
   cnv = new Canvas(1920, 941);
-
+alert(GLOBAL_user.displayName)
   //white note sprites//
   C4Rect = new Sprite(500, 750, 100, 300, 'k');
   C4Rect.color = 'white';
