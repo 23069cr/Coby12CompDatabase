@@ -68,6 +68,7 @@ async function fb_handleLogin(_user) {
     localStorage.setItem("Data", JSON.stringify(GLOBAL_user));
     localStorage.setItem("username", JSON.stringify(user));
     localStorage.setItem("pianoscore", JSON.stringify(pianoScore));
+    localStorage.setItem("geoscore", JSON.stringify(geoScore));
     const OUTPUT = document.getElementById("JavaScriptOutput");
     OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='sandboxPianoGame.html'\">Piano Play<button><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
   } else {

@@ -62,6 +62,13 @@ const PLAYER_WIDTH = 25;
 const OBSTACLE_HEIGHT = PLAYER_HEIGHT;
 const OBSTACLE_WIDTH = PLAYER_WIDTH;
 
+GLOBAL_user = JSON.parse(localStorage.getItem("Data"));
+console.log(GLOBAL_user);
+user = JSON.parse(localStorage.getItem("username"));
+console.log(user);
+geoScore = JSON.parse(localStorage.getItem("geoscore"));
+console.log(geoScore);
+
 var spawnDist = 0;
 var nextSpawn = 0;
 var score = 0;
@@ -75,7 +82,7 @@ var obstacles;
 /*******************************************************/
 function setup() {
     cnv= new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
-    
+    alert("Hello " + user)
     obstacles = new Group();
 
     floor =  new Sprite(SCREEN_WIDTH/2,  SCREEN_HEIGHT, SCREEN_WIDTH, 4, 's');
