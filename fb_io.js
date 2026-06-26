@@ -41,7 +41,8 @@ async function fb_handleLogin(_user) {
       alert("Unc");
     }
     console.log("Logged in user:", user);
-    var score = 0;
+    var pianoScore = 0;
+    var geoScore = 0;
     GLOBAL_user = _user; //Save the user details object to a global variable
     //display user info into the database//
     await firebase.database().ref('PianoPlay/users/' + GLOBAL_user.uid).update(
@@ -51,10 +52,22 @@ async function fb_handleLogin(_user) {
         email: GLOBAL_user.email,
         profile: GLOBAL_user.photoURL,
         age: (age),
-        score: (score)
+        pianoScore: (pianoScore)
+      }
+    );
+    await firebase.database().ref('GeoDash/users/' + GLOBAL_user.uid).update(
+      {
+        username: (user),
+        name: GLOBAL_user.displayName,
+        email: GLOBAL_user.email,
+        profile: GLOBAL_user.photoURL,
+        age: (age),
+        geoScore: (geoScore)
       }
     );
     localStorage.setItem("Data", JSON.stringify(GLOBAL_user));
+    localStorage.setItem("username", JSON.stringify(user));
+    localStorage.setItem("pianoscore", JSON.stringify(pianoScore));
     const OUTPUT = document.getElementById("JavaScriptOutput");
     OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='sandboxPianoGame.html'\">Piano Play<button><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
   } else {

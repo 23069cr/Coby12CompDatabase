@@ -18,8 +18,12 @@ let C5;
 //Grabs data from the local storage//
 GLOBAL_user = JSON.parse(localStorage.getItem("Data"));
 console.log(GLOBAL_user);
+user = JSON.parse(localStorage.getItem("username"));
+console.log(user);
+pianoScore = JSON.parse(localStorage.getItem("pianoscore"));
+console.log(pianoScore);
 
-var score = 0;
+var pianoScore = 0;
 function preload() {
   //notes sounds//
   C4 = loadSound("mp3Files/C.mp3");
@@ -40,7 +44,7 @@ function preload() {
 function setup() {
   console.log("setup: ");
   cnv = new Canvas(1920, 941);
-alert(GLOBAL_user.displayName)
+  alert("hello " + user);
   //white note sprites//
   C4Rect = new Sprite(500, 750, 100, 300, 'k');
   C4Rect.color = 'white';
@@ -85,94 +89,97 @@ alert(GLOBAL_user.displayName)
 function keyPressed() {
   //score testing//
   if (key === 'q') {
-  score = score + 1;
-}
-if (key === '2') {
-  score = score + 1;
-}
-if (key === 'w') {
-  score = score + 1;
-}
-if (key === '3') {
-  score = score + 1;
-}
-if (key === 'e') {
-  score = score + 1;
-}
-if (key === 'r') {
-  score = score + 1;
-}
-if (key === '5') {
-  score = score + 1;
-}
-if (key === 't') {
-  score = score + 1;
-}
-if (key === '6') {
-  score = score + 1;
-}
-if (key === 'y') {
-  score = score + 1;
-}
-if (key === '7') {
-  score = score + 1;
-}
-if (key === 'u') {
-  score = score + 1;
-}
-if (key === 'i') {
-  score = score + 1;
-}
+      firebase.database().ref('/PianoPlay/users/' + GLOBAL_user.uid).update(
+    score = pianoScore + 1
+  );
+    pianoScore = pianoScore + 1;
+  }
+  if (key === '2') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === 'w') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === '3') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === 'e') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === 'r') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === '5') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === 't') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === '6') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === 'y') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === '7') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === 'u') {
+    pianoScore = pianoScore + 1;
+  }
+  if (key === 'i') {
+    pianoScore = pianoScore + 1;
+  }
 
-//white note key presses to make sound//
-if (key === 'q') {
-  C4.play();
-}
-if (key === 'w') {
-  D4.play();
-}
-if (key === 'e') {
-  E4.play();
-}
-if (key === 'r') {
-  F4.play();
-}
-if (key === 't') {
-  G4.play();
-}
-if (key === 'y') {
-  A4.play();
-}
-if (key === 'u') {
-  B4.play();
-}
-if (key === 'i') {
-  C5.play();
-}
+  //white note key presses to make sound//
+  if (key === 'q') {
+    C4.play();
+  }
+  if (key === 'w') {
+    D4.play();
+  }
+  if (key === 'e') {
+    E4.play();
+  }
+  if (key === 'r') {
+    F4.play();
+  }
+  if (key === 't') {
+    G4.play();
+  }
+  if (key === 'y') {
+    A4.play();
+  }
+  if (key === 'u') {
+    B4.play();
+  }
+  if (key === 'i') {
+    C5.play();
+  }
 
-//black note key presses to make sound//
-if (key === '2') {
-  Csharp.play();
-}
-if (key === '3') {
-  Dsharp.play();
-}
-if (key === '5') {
-  Fsharp.play();
-}
-if (key === '6') {
-  Gsharp.play();
-}
-if (key === '7') {
-  Asharp.play();
-}
+  //black note key presses to make sound//
+  if (key === '2') {
+    Csharp.play();
+  }
+  if (key === '3') {
+    Dsharp.play();
+  }
+  if (key === '5') {
+    Fsharp.play();
+  }
+  if (key === '6') {
+    Gsharp.play();
+  }
+  if (key === '7') {
+    Asharp.play();
+  }
 }
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
   background('pink')
-  text("Score: " + score, 50, 100);
+  text("Score: " + pianoScore, 50, 100);
   textSize(30);
   text("inputs:", 350, 540);
   text("Q     2   W    3     E       R     5    T   6    Y    7     U         I", 475, 540);
