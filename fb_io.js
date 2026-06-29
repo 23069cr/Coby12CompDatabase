@@ -16,7 +16,7 @@ function DO_THIS(snapshot) {
 
 
 
-
+var login;
 var GLOBAL_user;
 var authenticationListener;
 //this is a listener that runs once//
@@ -32,6 +32,7 @@ function fb_login() {
 //this is the callback function for the listener//
 async function fb_handleLogin(_user) {
   if (_user) {
+    login = 1;
     let user = prompt("Enter a unique username?");
     let age = prompt("enter your age")
     if (age < 16) {
@@ -45,7 +46,7 @@ async function fb_handleLogin(_user) {
     var geoScore = 0;
     GLOBAL_user = _user; //Save the user details object to a global variable
     //display user info into the database//
-    await firebase.database().ref('PianoPlay/users/' + GLOBAL_user.uid).update(
+    await firebase.database().ref('PianoPlay/users/' + GLOBAL_user.uid).set(
       {
         username: (user),
         name: GLOBAL_user.displayName,
@@ -55,7 +56,7 @@ async function fb_handleLogin(_user) {
         pianoScore: (pianoScore)
       }
     );
-    await firebase.database().ref('GeoDash/users/' + GLOBAL_user.uid).update(
+    await firebase.database().ref('GeoDash/users/' + GLOBAL_user.uid).set(
       {
         username: (user),
         name: GLOBAL_user.displayName,
