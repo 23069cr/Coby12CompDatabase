@@ -109,10 +109,10 @@ highscoreTable = {
   },
   GeoDash: {
     users: {
-      Josh: 13,
-      Coby: 14,
-      Pasha: 7,
-      Lukas: 3,
+      Josh: 234,
+      Coby: 554,
+      Pasha: 14,
+      Lukas: 456,
     }
   }
 }
