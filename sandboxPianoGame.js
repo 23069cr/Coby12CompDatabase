@@ -15,7 +15,19 @@ let A4;
 let Asharp;
 let B4;
 let C5;
-//Grabs data from the local storage//
+
+//for loop excuse variable//
+var lives = 3;
+
+//note variables//
+var cNotePress = 0;
+var dNotePress = 0;
+var eNotePress = 0;
+var fNotePress = 0;
+var gNotePress = 0;
+var aNotePress = 0;
+var bNotePress = 0;
+
 GLOBAL_user = JSON.parse(localStorage.getItem("Data"));
 console.log(GLOBAL_user);
 user = JSON.parse(localStorage.getItem("username"));
@@ -23,8 +35,15 @@ console.log(user);
 pianoScore = JSON.parse(localStorage.getItem("pianoscore"));
 console.log(pianoScore);
 
+//score variable//
 var pianoScore = 0;
 function preload() {
+  hell = loadImage('images/HELL.jpg');
+  heaven = loadImage('images/heaven.jpg');
+  //note images//
+  crotchetImg = loadImage('images/crotchet.png');
+  trebleclefImg = loadImage('images/trebleclef.png');
+
   //notes sounds//
   C4 = loadSound("mp3Files/C.mp3");
   Csharp = loadSound("mp3Files/Csharp.mp3");
@@ -45,6 +64,22 @@ function setup() {
   console.log("setup: ");
   cnv = new Canvas(1920, 941);
   alert("hello " + user);
+  //safe keeping code so it won't ruin my game. livesdisplay.text = "Lives: " + lives;//
+
+  //image test//
+  trebleclef = new Sprite(860, 300, 70, 70, 'k');
+  trebleclef.image = (trebleclefImg);
+  trebleclefImg.resize(400, 400);
+  trebleclef.visible = true;
+
+  crotchet = new Sprite(950, 310, 70, 70, 'k');
+  crotchet.image = (crotchetImg);
+  crotchet.visible = true;
+  crotchetImg.resize(150, 300);
+
+  cnoteLine = new Sprite(950, 465, 150, 6, 'k')
+  cnoteLine.color = "black";
+
   //white note sprites//
   C4Rect = new Sprite(500, 750, 100, 300, 'k');
   C4Rect.color = 'white';
@@ -87,50 +122,178 @@ function setup() {
 }
 
 function keyPressed() {
-  //score testing//
-  if (key === 'q') {
-      firebase.database().ref('/PianoPlay/users/' + GLOBAL_user.uid).update(
-    score = pianoScore + 1
-  );
-    pianoScore = pianoScore + 1;
-  }
-  if (key === '2') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === 'w') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === '3') {
-    pianoScore = pianoScore + 1;
-  }
+  //Crotchet locations//
+  // C = 365//
+  // D = 342//
+  // E = 310// 
+  // G = 250//
+
+  //E presses//
   if (key === 'e') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === 'r') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === '5') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === 't') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === '6') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === 'y') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === '7') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === 'u') {
-    pianoScore = pianoScore + 1;
-  }
-  if (key === 'i') {
-    pianoScore = pianoScore + 1;
+    if (crotchet.y == 310) {
+      console.log(eNotePress = eNotePress + 1);
+    }
+
+    if (crotchet.y == 310) {
+      pianoScore = pianoScore + 1;
+    } else {
+      lives--;
+      pianoScore = pianoScore - 1;
+    }
+    //the console logs are so I can control which direction they go in// 
+    if (eNotePress == 1 && crotchet.y == 310) {
+      crotchet.y = 342;
+    }
+
+    if (eNotePress == 4 && crotchet.y == 310) {
+      crotchet.y = 342;
+    }
+
+    if (eNotePress == 5 && crotchet.y == 310) {
+      crotchet.y = 250;
+    }
+
+    if (eNotePress == 6 && crotchet.y == 310) {
+      crotchet.y = 342;
+    }
+
+    if (eNotePress == 9 && crotchet.y == 310) {
+      crotchet.y = 342;
+    }
+
+    if (eNotePress == 10 && crotchet.y == 310) {
+      crotchet.y = 342;
+    }
   }
 
+
+  //D presses//
+  if (key === 'w') {
+    if (crotchet.y == 342) {
+      console.log(dNotePress = dNotePress + 1);
+    }
+
+    if (crotchet.y == 342) {
+      pianoScore = pianoScore + 1;
+    } else {
+      lives--;
+      pianoScore = pianoScore - 1;
+    }
+
+    if (dNotePress == 1 && crotchet.y == 342) {
+      crotchet.y = 365;
+    }
+
+    if (dNotePress == 2 && crotchet.y == 342) {
+      crotchet.y = 310;
+    }
+
+    if (dNotePress == 5 && crotchet.y == 342) {
+      crotchet.y = 310;
+    }
+
+    if (dNotePress == 6 && crotchet.y == 342) {
+      crotchet.y = 365;
+    }
+
+    if (dNotePress == 7 && crotchet.y == 342) {
+      crotchet.y = 310;
+    }
+
+    if (dNotePress == 8 && crotchet.y == 342) {
+      crotchet.y = 310;
+    }
+
+    if (dNotePress == 9 && crotchet.y == 342) {
+      crotchet.y = 365;
+    }
+  }
+
+  //C presses//
+  if (key === 'q') {
+    if (crotchet.y == 365) {
+      console.log(cNotePress = cNotePress + 1);
+    }
+
+    if (crotchet.y == 365) {
+      pianoScore = pianoScore + 1;
+    } else {
+      lives--;
+      pianoScore = pianoScore - 1;
+    }
+
+    if (cNotePress == 1 && crotchet.y == 365) {
+      crotchet.y = 342;
+    }
+
+    if (cNotePress == 2 && crotchet.y == 365) {
+      crotchet.y = 342;
+    }
+  }
+
+  //G presses//
+  if (key === 't') {
+    if (crotchet.y == 250) {
+      console.log(gNotePress = gNotePress + 1);
+    }
+
+    if (crotchet.y == 250) {
+      pianoScore = pianoScore + 1;
+    } else {
+      lives--;
+      pianoScore = pianoScore - 1;
+    }
+
+    if (gNotePress == 2 && crotchet.y == 250) {
+      crotchet.y = 310;
+    }
+  }
+
+  //unused note presses//
+  if (key === 'r') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === 'y') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === 'u') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === 'i') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === '2') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === '3') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === '5') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === '6') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
+
+  if (key === '7') {
+    lives--;
+    pianoScore = pianoScore - 1;
+  }
   //white note key presses to make sound//
   if (key === 'q') {
     C4.play();
@@ -177,13 +340,42 @@ function keyPressed() {
 /*******************************************************/
 // draw()
 /*******************************************************/
-function draw() {
+async function draw() {
   background('pink')
-  text("Score: " + pianoScore, 50, 100);
+
+  //lose screen//
+  if (lives < 1) {
+    background(hell);
+    text("Game over! You're in hell now. Your score was: " + pianoScore, 600, 540);
+    exit();
+  }
+
+  //win screen//
+  if (cNotePress == 3) {
+    background(heaven);
+    text("Good job! You're in heaven now. Your score was: " + pianoScore, 600, 540);
+       const OUTPUT = document.getElementById("JavaScriptOutput");
+    OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
+    await firebase.database().ref('GeoDash/users/' + GLOBAL_user.uid).update(
+      {
+        pianoScore: (pianoScore)
+      }
+    );
+    console.log(pianoScore);
+    exit();
+  }
+  text("Score: " + pianoScore, 800, 50);
   textSize(30);
   text("inputs:", 350, 540);
   text("Q     2   W    3     E       R     5    T   6    Y    7     U         I", 475, 540);
   text("C    C#   D   D#   E       F    F#   G  G#  A   A#   B        C", 475, 590);
+
+
+  //My beautiful for loop//
+  for (i = 0; i < lives; i++) {
+    rect(60 * i, 60, 55, 55);
+  }
+
   //white note change colour if key presses//
   if (kb.pressing('q')) {
     C4Rect.color = 'grey';

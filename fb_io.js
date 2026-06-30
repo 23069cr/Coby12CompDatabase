@@ -16,7 +16,7 @@ function DO_THIS(snapshot) {
 
 
 
-var login;
+var login = 0;
 var GLOBAL_user;
 var authenticationListener;
 //this is a listener that runs once//
@@ -32,8 +32,10 @@ function fb_login() {
 //this is the callback function for the listener//
 async function fb_handleLogin(_user) {
   if (_user) {
-    login = 1;
     let user = prompt("Enter a unique username?");
+    if (user = null){
+      prompt("Enter a unique username");
+    }
     let age = prompt("enter your age")
     if (age < 16) {
       window.close();
