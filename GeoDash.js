@@ -18,8 +18,7 @@ function endGame(_player, _obstacle) {
     // Put your database writes here:
     firebase.database().ref(`GeoDash/users/${GLOBAL_user.uid}/geoScore`).set(geoScore);
     console.log(geoScore);
-
-
+//coment to commit and push//
 }
 
 
