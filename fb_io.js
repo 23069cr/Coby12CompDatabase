@@ -32,18 +32,21 @@ function fb_login() {
 //this is the callback function for the listener//
 async function fb_handleLogin(_user) {
   if (_user) {
-    let user = prompt("Enter a unique username?");
-    if (user = null){
-      prompt("Enter a unique username");
-    }
+    let user = prompt("Enter a unique username");
+  
     let age = prompt("enter your age")
     if (age < 16) {
-      window.close();
+      alert("you have to be 16 years old.")
+      prompt("enter your age")
     }
+    while (isNaN(age)) {
+      age = prompt("Please enter a valid age:");
+    }
+    console.log(age);
+
     if (age > 49) {
       alert("Unc");
     }
-    console.log("Logged in user:", user);
     var pianoScore = 0;
     var geoScore = 0;
     GLOBAL_user = _user; //Save the user details object to a global variable
@@ -68,6 +71,7 @@ async function fb_handleLogin(_user) {
         geoScore: (geoScore)
       }
     );
+    console.log("Logged in user:", user);
     localStorage.setItem("Data", JSON.stringify(GLOBAL_user));
     localStorage.setItem("username", JSON.stringify(user));
     localStorage.setItem("pianoscore", JSON.stringify(pianoScore));

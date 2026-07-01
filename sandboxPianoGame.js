@@ -340,7 +340,7 @@ function keyPressed() {
 /*******************************************************/
 // draw()
 /*******************************************************/
-async function draw() {
+function draw() {
   background('pink')
 
   //lose screen//
@@ -356,11 +356,7 @@ async function draw() {
     text("Good job! You're in heaven now. Your score was: " + pianoScore, 600, 540);
        const OUTPUT = document.getElementById("JavaScriptOutput");
     OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
-    await firebase.database().ref('GeoDash/users/' + GLOBAL_user.uid).update(
-      {
-        pianoScore: (pianoScore)
-      }
-    );
+firebase.database().ref(`PianoPlay/users/${GLOBAL_user.uid}/pianoScore`).set(pianoScore);
     console.log(pianoScore);
     exit();
   }
