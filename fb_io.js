@@ -33,7 +33,7 @@ function fb_login() {
 async function fb_handleLogin(_user) {
   if (_user) {
     let user = prompt("Enter a unique username");
-  
+
     let age = prompt("enter your age")
     if (age < 16) {
       alert("you have to be 16 years old.")
@@ -104,7 +104,7 @@ function fb_logout() {
 }
 
 
-
+function testScores(){
 highscoreTable = {
   PianoPlay: {
     users: {
@@ -124,3 +124,4 @@ highscoreTable = {
   }
 }
 firebase.database().ref('/').set(highscoreTable)
+}

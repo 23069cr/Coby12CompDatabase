@@ -63,7 +63,7 @@ function preload() {
 function setup() {
   console.log("setup: ");
   cnv = new Canvas(1920, 941);
-  alert("hello " + user);
+  alert("hello " + GLOBAL_user.displayName);
   //safe keeping code so it won't ruin my game. livesdisplay.text = "Lives: " + lives;//
 
   //image test//
@@ -354,9 +354,9 @@ function draw() {
   if (cNotePress == 3) {
     background(heaven);
     text("Good job! You're in heaven now. Your score was: " + pianoScore, 600, 540);
-       const OUTPUT = document.getElementById("JavaScriptOutput");
+    const OUTPUT = document.getElementById("JavaScriptOutput");
     OUTPUT.innerHTML = "<h2>Choose your game!</h2><button onclick=\"location.href='GeoDash.html'\">GeoDash<button>";
-firebase.database().ref(`PianoPlay/users/${GLOBAL_user.uid}/pianoScore`).set(pianoScore);
+  firebase.database().ref(`PianoPlay/users/${GLOBAL_user.uid}/pianoScore`).set(pianoScore);
     console.log(pianoScore);
     exit();
   }
