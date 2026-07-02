@@ -35,3 +35,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.geoDashButton {
+  width: 236px;
+}
